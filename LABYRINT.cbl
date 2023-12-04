@@ -13,9 +13,9 @@
        INPUT-OUTPUT SECTION.
       ******************************************************************
        FILE-CONTROL.
-           SELECT LABEIN   ASSIGN TO "LABEIN.txt" 
+           SELECT LABEIN   ASSIGN TO "test/LABEIN.txt" 
                ORGANIZATION IS LINE SEQUENTIAL.  
-           SELECT LABOUT   ASSIGN TO "LABOUT.txt".
+           SELECT LABOUT   ASSIGN TO "out/LABOUT.txt".
       
        DATA DIVISION.
       
