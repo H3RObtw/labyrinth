@@ -46,7 +46,7 @@
            05  WEGE     OCCURS 5.
                10 PFAD            PIC X(2500).
                10 PFAD-LAENGE     PIC 9999.
-      **************************************************************************
+      ******************************************************************
       /
       ******************************************************************
        PROCEDURE DIVISION USING LABYRINTH, POSBESUCH.
@@ -203,11 +203,9 @@
               MOVE ZAEHLERZUSTAND TO ZUSTAND
       *    WURDE JEDER MÖGLICHE PFAD GEFUNDEN?
               IF ZAEHLERZUSTAND > 3   
-                 IF PFAD(ZAEHLERBESUCHER) > 0
-                   DISPLAY 'GEFUNDEN:'
-                   DISPLAY PFAD(ZAEHLERBESUCHER)
-                   MOVE    1  TO ALLEGEFUNDEN
-                 END-IF      
+                 DISPLAY 'GEFUNDEN: '
+                 DISPLAY PFAD(ZAEHLERBESUCHER)
+                 MOVE    1  TO ALLEGEFUNDEN              
               END-IF
            END-IF.
        ZUSTAND-SETZEN-EXIT. EXIT.       
@@ -220,3 +218,4 @@
            MOVE 0 TO ZAEHLERZUSTAND.
        INITIALISIEREN-EXIT. EXIT.
        END PROGRAM LABWEG.
+       

@@ -15,10 +15,11 @@
        FILE-CONTROL.
            SELECT LABEIN   ASSIGN TO "test/LABEIN.txt" 
                ORGANIZATION IS LINE SEQUENTIAL.  
-           SELECT LABOUT   ASSIGN TO "out/LABOUT.txt".
-      
+           SELECT LABOUT   ASSIGN TO "out/LABOUT.txt"
+               ORGANIZATION IS LINE SEQUENTIAL.  
+      ******************************************************************
        DATA DIVISION.
-      
+      ******************************************************************
        FILE SECTION.
        FD LABEIN
             BLOCK CONTAINS 0
@@ -32,15 +33,13 @@
             RECORDING F
             RECORD    050
             LABEL RECORD IS STANDARD.
-       01 AUSGEBEN PIC X(50).
+       01 AUSGEBEN PIC X(500).
       /
       ******************************************************************
        WORKING-STORAGE SECTION.
-      ******************************************************************
-      /
        01  WS-EOF         PIC X(1)        VALUE "X".
        01  LABYZEILE      PIC X(50)       VALUE ' '.
-       01  ZAEHLER        PIC 9           VALUE 1.
+       01  ZAEHLER        PIC 99          VALUE 1.
        01  TEMP           PIC 99.
        01  LABYRINTH.
            05  LABZEILE OCCURS 50 PIC X(50).
@@ -51,7 +50,7 @@
                10 ZEILE           PIC 99.
                10 STELLE          PIC 99.
            05  WEGE     OCCURS 5.
-               10 PFAD            PIC X(2500).
+               10 PFAD            PIC X(9999).
                10 PFAD-LAENGE     PIC 9999.
        01  FEHLERMELDUNG  PIC X(50)       VALUE '#'.
       /
@@ -75,9 +74,10 @@
                     AT END MOVE "Y" TO WS-EOF
                END-READ
                MOVE LABYZEILE TO LABZEILE(ZAEHLER)
+               DISPLAY LABZEILE(ZAEHLER) " : " ZAEHLER
                ADD 1 TO ZAEHLER
            END-PERFORM.
-      
+
            CALL 'LABPRUEF' USING LABYRINTH, POSBESUCH, FEHLERMELDUNG.
            DISPLAY "FEHLERMELDUNG:" FEHLERMELDUNG
            DISPLAY "LABYRINTH:" 
@@ -98,7 +98,7 @@
                   WRITE AUSGEBEN
                   STRING "WEG: " PFAD(ZAEHLER)
                   DELIMITED BY SIZE INTO AUSGEBEN
-                  WRITE AUSGEBEN
+                  WRITE AUSGEBEN  
                   ADD 1 TO ZAEHLER
               END-PERFORM
            ELSE
@@ -109,4 +109,4 @@
            CLOSE LABEIN.
            CLOSE LABOUT.
            GOBACK.
-       END PROGRAM LABYRINT.
+       STOP RUN.
