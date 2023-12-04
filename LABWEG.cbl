@@ -207,7 +207,7 @@
                    DISPLAY 'GEFUNDEN:'
                    DISPLAY PFAD(ZAEHLERBESUCHER)
                    MOVE    1  TO ALLEGEFUNDEN
-                 END-IF
+                 END-IF      
               END-IF
            END-IF.
        ZUSTAND-SETZEN-EXIT. EXIT.       
