@@ -11,6 +11,13 @@ fehler fixen
 - pfad wird ab zweitem Besucher nicht mehr richtig ausgegeben
 
 
+## Benutzte Programme & Extensions
+- Visual Studio Code, Version 1.63.2
+- Gnucobol, Version 3.2.0
+- Bitlang "Cobol" Extension, Version 8.1.31
+- COBOLworx "GDB Debugging support for GnuCOBOL" Extension, Version 4.2.3
+
+
 ## Aufgabenstellung
 
 ### Problemstellung
