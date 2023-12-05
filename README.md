@@ -17,14 +17,9 @@ fehler fixen
 
 Die Abteilung Irrgarten der Redaktion einer Rätselzeitschrift wünscht ein Programm,
 welches zu einem vorgegebenen Labyrinth für verschiedene im Irrgarten befindliche
-Besucher einen möglichst kurzenWeg ins Freie ermittelt.
-Die Maximalzahl der Besucher, die sich im Labyrinth aufhalten, sei fünf. Das Labyrinth
-mit den Positionen der Besucher soll aus einer Datei eingelesen werden.
-Für jeden vorhandenen Besucher soll ein Plan ausgegeben werden, der ihm dern Weg aus
-dem Labyrinth anzeigt. Dazu soll ermittelt werden, wie viele Schritte er bis zum
-Verlassen des Labyrinths benötigt.
-Dabei entspricht ein Schritt dem Aufsuchen einer Nachbarpositition. Das Labyrinth ist
-verlassen, wenn der Ausgang erreicht ist.
+Besucher einen möglichst kurzenWeg ins Freie ermittelt. Die Maximalzahl der Besucher, die sich im Labyrinth aufhalten, sei fünf. Das Labyrinthmit den Positionen der Besucher soll aus einer Datei eingelesen werden.
+
+Für jeden vorhandenen Besucher soll ein Plan ausgegeben werden, der ihm dern Weg aus dem Labyrinth anzeigt. Dazu soll ermittelt werden, wie viele Schritte er bis zum Verlassen des Labyrinths benötigt. Dabei entspricht ein Schritt dem Aufsuchen einer Nachbarpositition. Das Labyrinth ist verlassen, wenn der Ausgang erreicht ist.
 
 ### Programmsystem
 
@@ -56,12 +51,14 @@ Dokumentieren Sie jeweils zu Ihrem Teil (s. u.), Beschreibung der Algorithmen an
 eines selbstgewählten Beispiels sowie als Struktogramm, Programmeinheiten und
 mathematische Hintergründe.
 Begründen Sie die Auswahl Ihrer Testfälle und diskutieren Sie sie.
+
 Teil A
 - Eingaben (inklusive formaler Fehlerprüfung), Ausgabe der Ergebnisse jeweils über
 Dateien
 - Prüfung, ob eingelesenes Labyrinth den geforderten Eigenschaften entspricht
 (inklusive korrekter Besucherzahl)
 - Wahl und Begründung geeigneter Datenstrukturen
+
 Teil B
 - Ermittlung des Wegs jedes Besuchers
 - Berechnung, wie viele Schritte jeder Besucher bis zum Ausgang benötigt
@@ -70,7 +67,5 @@ Teil B
 
 Aufgabenstellung, Programmcodes als Listing und ausführbares Programmsystem, E-/A-
 Dateien der Tests, die oben beschriebene ganzheitliche Entwicklerdokumentation
-entweder in schriftlicher Form (Word-, oder pdf-Datei) oder als Präsentation (ppt-Datei,
-dann auch Darbietung der Präsentation)
-Unterschriebene Eigenständigkeitserkärung mit Nennung der eigenen erstellten
+entweder in schriftlicher Form (Word-, oder pdf-Datei) oder als Präsentation (ppt-Datei,dann auch Darbietung der Präsentation) Unterschriebene Eigenständigkeitserkärung mit Nennung der eigenen erstellten
 Programmteile.
