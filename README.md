@@ -1,4 +1,4 @@
-###Labyrinth
+#Labyrinth
 
 ## TODOs
 
@@ -13,7 +13,7 @@ fehler fixen
 
 ## Aufgabenstellung
 
-# Problemstellung
+### Problemstellung
 
 Die Abteilung Irrgarten der Redaktion einer Rätselzeitschrift wünscht ein Programm,
 welches zu einem vorgegebenen Labyrinth für verschiedene im Irrgarten befindliche
@@ -26,7 +26,7 @@ Verlassen des Labyrinths benötigt.
 Dabei entspricht ein Schritt dem Aufsuchen einer Nachbarpositition. Das Labyrinth ist
 verlassen, wenn der Ausgang erreicht ist.
 
-# Programmsystem
+### Programmsystem
 
 Neben selbstgewählten Testbeispielen soll das unten angegebenene Labyrinth gerechnet
 werden.
@@ -48,7 +48,7 @@ Eine Lücke im Rand (mit Breite 1) wird als Ausgang bezeichnet
 Modularisieren Sie Ihr Programmsystem nach dem EVA-Prinzip sowie nach sinnvollen
 Funktionseinheiten.
 
-# Entwicklerdokumentation
+### Entwicklerdokumentation
 
 Die ganzheitliche Entwicklerdokumentation sollte ein Inhaltsverzeichnis aufweisen und zu
 jedem Kapitel eine Autorenangabe erhalten.
@@ -66,7 +66,7 @@ Teil B
 - Ermittlung des Wegs jedes Besuchers
 - Berechnung, wie viele Schritte jeder Besucher bis zum Ausgang benötigt
 
-# Abzugeben sind:
+### Abzugeben sind:
 
 Aufgabenstellung, Programmcodes als Listing und ausführbares Programmsystem, E-/A-
 Dateien der Tests, die oben beschriebene ganzheitliche Entwicklerdokumentation
