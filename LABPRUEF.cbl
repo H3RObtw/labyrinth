@@ -62,7 +62,7 @@
       ******************************************************************
        STERUERUNG SECTION.
            PERFORM INITIALISIEREN.
-      * DIMENSION FESTLEGEN UND �BERPR�FEN
+      * DIMENSION FESTLEGEN UND ÜBERPRÜFEN
            PERFORM UNTIL ZAEHLERLABYRINTH > 50
               MOVE LABZEILE(ZAEHLERLABYRINTH) TO AKTUELLEZEILE
               MOVE 50 TO ZAEHLERZEILE
