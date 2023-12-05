@@ -85,7 +85,8 @@
               ADD 1 TO ZAEHLERBESUCHER
            END-PERFORM.       
            EXIT PROGRAM.
-       STEUERUNG-EXIT. EXIT.       
+       STEUERUNG-EXIT. EXIT.      
+
        WEG-SUCHEN SECTION.
       *    IN WELCHE RICHTUNG?
            IF (AKTPFAD(AKTPFAD-LAENGE:1) = 'U' AND ZUSTAND = 0)
@@ -152,7 +153,8 @@
                   PERFORM ZUSTAND-SETZEN UNTIL ZUSTAND NOT = 4
               END-IF
            END-IF.
-       WEG-SUCHEN-EXIT. EXIT.       
+       WEG-SUCHEN-EXIT. EXIT.  
+
        ZUSTAND-SETZEN SECTION.
       *    WAS WAR DER VORHERIGE SCHRITT?
            EVALUATE TRUE
@@ -208,7 +210,8 @@
                  MOVE    1  TO ALLEGEFUNDEN              
               END-IF
            END-IF.
-       ZUSTAND-SETZEN-EXIT. EXIT.       
+       ZUSTAND-SETZEN-EXIT. EXIT. 
+             
        INITIALISIEREN SECTION.
            INITIALIZE ZAEHLER.
            INITIALIZE WEITEREVARIABLEN.
