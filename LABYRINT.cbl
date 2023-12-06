@@ -13,7 +13,7 @@
        INPUT-OUTPUT SECTION.
       ******************************************************************
        FILE-CONTROL.
-           SELECT LABEIN   ASSIGN TO "test/LABEIN2.txt" 
+           SELECT LABEIN   ASSIGN TO "test/LABEIN.txt" 
                ORGANIZATION IS LINE SEQUENTIAL.  
            SELECT LABOUT   ASSIGN TO "out/LABOUT.txt"
                ORGANIZATION IS LINE SEQUENTIAL.  
@@ -38,7 +38,7 @@
       ******************************************************************
        WORKING-STORAGE SECTION.
        01  WS-EOF         PIC X(1)        VALUE "X".
-       01  LABYZEILE      PIC X(500)       VALUE ' '.
+       01  LABYZEILE      PIC X(50)       VALUE ' '.
        01  ZAEHLER        PIC 99          VALUE 1.
        01  TEMP           PIC 99.
        01  LABYRINTH.
