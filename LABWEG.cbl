@@ -83,7 +83,7 @@
                  PERFORM WEG-SUCHEN UNTIL ALLEGEFUNDEN = 1
               END-EVALUATE       
               ADD 1 TO ZAEHLERBESUCHER
-           END-PERFORM.       
+           END-PERFORM.
            EXIT PROGRAM.
        STEUERUNG-EXIT. EXIT.      
 
@@ -207,6 +207,7 @@
               IF ZAEHLERZUSTAND > 3   
                  DISPLAY 'GEFUNDEN: '
                  DISPLAY PFAD(ZAEHLERBESUCHER)
+                 DISPLAY PFAD-LAENGE(ZAEHLERBESUCHER)
                  MOVE    1  TO ALLEGEFUNDEN              
               END-IF
            END-IF.

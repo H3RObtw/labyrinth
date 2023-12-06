@@ -13,7 +13,7 @@
        INPUT-OUTPUT SECTION.
       ******************************************************************
        FILE-CONTROL.
-           SELECT LABEIN   ASSIGN TO "test/LABEIN.txt" 
+           SELECT LABEIN   ASSIGN TO "test/test.txt" 
                ORGANIZATION IS LINE SEQUENTIAL.  
            SELECT LABOUT   ASSIGN TO "out/LABOUT.txt"
                ORGANIZATION IS LINE SEQUENTIAL.  
@@ -50,7 +50,7 @@
                10 ZEILE           PIC 99.
                10 STELLE          PIC 99.
            05  WEGE     OCCURS 5.
-               10 PFAD            PIC X(9999).
+               10 PFAD            PIC X(2500).
                10 PFAD-LAENGE     PIC 9999.
        01  FEHLERMELDUNG  PIC X(50)       VALUE '#'.
       /
