@@ -63,7 +63,7 @@
                WHEN STELLE(ZAEHLERBESUCHER) = 0
                AND  ZEILE(ZAEHLERBESUCHER) = 0
                  MOVE 'KEIN BESUCHER'    TO PFAD(ZAEHLERBESUCHER)
-                 MOVE 0                  TO PFAD-LAENGE(ZAEHLERBESUCHER)
+                 MOVE 0               TO PFAD-LAENGE(ZAEHLERBESUCHER)
                  DISPLAY 'KEIN BESUCHER'
       *        IST DER BESUCHER AM RAND? -> KEINEN PFAD SUCHEN
                WHEN STELLE(ZAEHLERBESUCHER) = 1
@@ -80,6 +80,8 @@
                  DISPLAY 'BESUCHER:' BESUCHER(ZAEHLERBESUCHER)
                  MOVE ZEILE(ZAEHLERBESUCHER)  TO ZAEHLERZEILE
                  MOVE STELLE(ZAEHLERBESUCHER) TO ZAEHLERSTELLE
+                 MOVE 0    TO AKTPFAD-LAENGE 
+                 MOVE 9999 TO PFAD-LAENGE(ZAEHLERBESUCHER)
                  PERFORM WEG-SUCHEN UNTIL ALLEGEFUNDEN = 1
               END-EVALUATE       
               ADD 1 TO ZAEHLERBESUCHER
@@ -130,11 +132,25 @@
            OR   ZAEHLERZEILE  = 1
            OR   ZAEHLERSTELLE = ENDEZEILE
            OR   ZAEHLERZEILE  = LETZTEZEILE
-              IF  AKTZEICHEN = 'X'
+           OR   AKTPFAD-LAENGE > PFAD-LAENGE(ZAEHLERBESUCHER)
+           OR   AKTPFAD-LAENGE > 2499
+              EVALUATE TRUE
+                  WHEN  AKTPFAD-LAENGE > 2499
+                  DISPLAY 'HOW DID WE GET HERE?!'
+                  MOVE    4 TO ZUSTAND
+                  PERFORM ZUSTAND-SETZEN UNTIL ZUSTAND NOT = 4
+              
+              WHEN  AKTZEICHEN = 'X'
                   DISPLAY 'SACKGASSE'
                   MOVE    4 TO ZUSTAND
                   PERFORM ZUSTAND-SETZEN UNTIL ZUSTAND NOT = 4
-              ELSE
+              
+              WHEN  AKTPFAD-LAENGE > PFAD-LAENGE(ZAEHLERBESUCHER)
+                  DISPLAY 'ALTER PFAD KLEINER ALS NEUER PFAD'
+                  MOVE    4 TO ZUSTAND
+                  PERFORM ZUSTAND-SETZEN UNTIL ZUSTAND NOT = 4
+     
+              WHEN OTHER
       *          WURDE EIN PFAD GEFUNDEN? WENN JA IST ER KÜRZER?
                  DISPLAY 'AUSGANG GEFUNDEN'
                  DISPLAY AKTPFAD-LAENGE '<' PFAD-LAENGE(ZAEHLERBESUCHER)
@@ -145,7 +161,7 @@
                  END-IF
                  MOVE    4 TO ZUSTAND
                  PERFORM ZUSTAND-SETZEN UNTIL ZUSTAND NOT = 4
-              END-IF
+              END-EVALUATE
            ELSE
               IF  AKTZEICHEN = 'X'
                   DISPLAY 'ZURÜCK'

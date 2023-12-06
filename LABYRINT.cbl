@@ -13,7 +13,7 @@
        INPUT-OUTPUT SECTION.
       ******************************************************************
        FILE-CONTROL.
-           SELECT LABEIN   ASSIGN TO "test/test.txt" 
+           SELECT LABEIN   ASSIGN TO "test/LABEIN2.txt" 
                ORGANIZATION IS LINE SEQUENTIAL.  
            SELECT LABOUT   ASSIGN TO "out/LABOUT.txt"
                ORGANIZATION IS LINE SEQUENTIAL.  
@@ -96,15 +96,16 @@
                   ", ZEICHEN: " LABYZEILE(TEMP:1)
                   DELIMITED BY SIZE INTO AUSGEBEN
                   WRITE AUSGEBEN
+                  MOVE SPACES TO AUSGEBEN
                   STRING "WEG: " PFAD(ZAEHLER)
                   DELIMITED BY SIZE INTO AUSGEBEN
                   WRITE AUSGEBEN  
+                  MOVE SPACES TO AUSGEBEN
                   ADD 1 TO ZAEHLER
               END-PERFORM
            ELSE
               MOVE FEHLERMELDUNG TO AUSGEBEN
            END-IF.
-           WRITE AUSGEBEN.
       
            CLOSE LABEIN.
            CLOSE LABOUT.
