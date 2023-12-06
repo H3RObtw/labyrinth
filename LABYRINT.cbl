@@ -38,7 +38,7 @@
       ******************************************************************
        WORKING-STORAGE SECTION.
        01  WS-EOF         PIC X(1)        VALUE "X".
-       01  LABYZEILE      PIC X(50)       VALUE ' '.
+       01  LABYZEILE      PIC X(500)       VALUE ' '.
        01  ZAEHLER        PIC 99          VALUE 1.
        01  TEMP           PIC 99.
        01  LABYRINTH.
@@ -70,12 +70,24 @@
            OPEN INPUT  LABEIN.
            OPEN OUTPUT LABOUT.
            PERFORM UNTIL WS-EOF = "Y"
-               READ LABEIN    INTO LABYZEILE            
-                    AT END MOVE "Y" TO WS-EOF
-               END-READ
-               MOVE LABYZEILE TO LABZEILE(ZAEHLER)
-               DISPLAY LABZEILE(ZAEHLER) " : " ZAEHLER
-               ADD 1 TO ZAEHLER
+               IF ZAEHLER > 50
+                  MOVE 'ES GIBT ZU VIELE ZEILEN IN DER EINGABEDATEI'
+                  TO FEHLERMELDUNG
+                  MOVE "Y" TO WS-EOF
+               ELSE      
+                  READ LABEIN INTO LABYZEILE            
+                       AT END MOVE "Y" TO WS-EOF
+                  END-READ
+      /            IF FUNCTION LENGTH(LABYZEILE) > 50
+      /               MOVE 'ES GIBT ZU VIELE SPALTEN IN DER EINGABEDATEI'
+      /                  TO FEHLERMELDUNG
+      /                  MOVE "Y" TO WS-EOF
+      /            ELSE
+                     MOVE LABYZEILE TO LABZEILE(ZAEHLER)
+                     DISPLAY LABZEILE(ZAEHLER) " : " ZAEHLER
+                     ADD 1 TO ZAEHLER
+      /            END-IF
+               END-IF
            END-PERFORM.
 
            CALL 'LABPRUEF' USING LABYRINTH, POSBESUCH, FEHLERMELDUNG.
@@ -105,6 +117,7 @@
               END-PERFORM
            ELSE
               MOVE FEHLERMELDUNG TO AUSGEBEN
+              WRITE AUSGEBEN
            END-IF.
       
            CLOSE LABEIN.

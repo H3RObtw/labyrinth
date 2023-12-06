@@ -83,6 +83,10 @@
                  MOVE 0    TO AKTPFAD-LAENGE 
                  MOVE 9999 TO PFAD-LAENGE(ZAEHLERBESUCHER)
                  PERFORM WEG-SUCHEN UNTIL ALLEGEFUNDEN = 1
+                 IF PFAD-LAENGE(ZAEHLERBESUCHER) = 9999
+                    MOVE 'BESUCHER HAT KEINEN AUSGANG' 
+                        TO PFAD(ZAEHLERBESUCHER) 
+                 END-IF
               END-EVALUATE       
               ADD 1 TO ZAEHLERBESUCHER
            END-PERFORM.
