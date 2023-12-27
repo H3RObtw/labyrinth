@@ -6,7 +6,7 @@
         {
             "label": "make",
             "type": "shell",
-            "command": "cobcd -x LABYRINT.cbl LABPRUEF.cbl LABWEG.cbl"
+            "command": "cobcd -x Application.cbl LABYRINT.cbl LABPRUEF.cbl LABWEG.cbl"
         }
     ]
 }

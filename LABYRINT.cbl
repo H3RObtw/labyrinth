@@ -13,9 +13,9 @@
        INPUT-OUTPUT SECTION.
       ******************************************************************
        FILE-CONTROL.
-           SELECT LABEIN   ASSIGN TO "test/LABEIN.txt" 
+           SELECT LABEIN   ASSIGN TO LABY
                ORGANIZATION IS LINE SEQUENTIAL.  
-           SELECT LABOUT   ASSIGN TO "out/LABOUT.txt"
+           SELECT LABOUT   ASSIGN TO AUSGEBEN
                ORGANIZATION IS LINE SEQUENTIAL.  
       ******************************************************************
        DATA DIVISION.
@@ -34,7 +34,7 @@
             RECORD    050
             LABEL RECORD IS STANDARD.
        01 AUSGEBEN PIC X(500).
-      /
+      
       ******************************************************************
        WORKING-STORAGE SECTION.
        01  WS-EOF         PIC X(1)        VALUE "X".
@@ -53,9 +53,15 @@
                10 PFAD            PIC X(2500).
                10 PFAD-LAENGE     PIC 9999.
        01  FEHLERMELDUNG  PIC X(50)       VALUE '#'.
+
+      / 
+      ******************************************************************
+       LINKAGE SECTION.
+      ****************************************************************** 
+       01 FILENAME PIC X(50).
       /
       ******************************************************************
-       PROCEDURE DIVISION.
+       PROCEDURE DIVISION USING FILENAME.
       ******************************************************************
       /
        STEUERUNG SECTION.
@@ -67,6 +73,8 @@
            INITIALIZE FEHLERMELDUNG.
            MOVE '#' TO FEHLERMELDUNG.
            MOVE 1 TO ZAEHLER.
+           STRING "resources/in/" FILENAME INTO LABY END-STRING
+           STRING "resources/out/" FILENAME INTO AUSGEBEN END-STRING
            OPEN INPUT  LABEIN.
            OPEN OUTPUT LABOUT.
            PERFORM UNTIL WS-EOF = "Y"
@@ -123,4 +131,4 @@
            CLOSE LABEIN.
            CLOSE LABOUT.
            GOBACK.
-       STOP RUN.
+       END PROGRAM LABYRINT.
