@@ -5,7 +5,7 @@
       ******************************************************************
        IDENTIFICATION DIVISION.
       ******************************************************************
-       PROGRAM-ID. LABYRINT-APPLICATION.
+       PROGRAM-ID. APPLICATION.
       ******************************************************************
        ENVIRONMENT DIVISION.
       ******************************************************************
@@ -33,8 +33,10 @@
                 READ INPUT-FILE INTO FILENAME
                     AT END MOVE "Y" TO WS-EOF
                 END-READ
-                DISPLAY "DATEI: " FILENAME
-                CALL "LABYRINT" USING FILENAME
+                IF NOT FILENAME(1:1) = "#"
+                   DISPLAY "DATEI: " FILENAME
+                   CALL "LABYRINT" USING FILENAME
+                END-IF
            END-PERFORM.        
            CLOSE INPUT-FILE.
        STOP RUN.

@@ -60,7 +60,7 @@
       ******************************************************************
        PROCEDURE DIVISION USING LABYRINTH, POSBESUCH, FEHLERMELDUNG.
       ******************************************************************
-       STERUERUNG SECTION.
+       STEUERUNG SECTION.
            PERFORM INITIALISIEREN.
       * DIMENSION FESTLEGEN UND ÜBERPRÜFEN
            PERFORM UNTIL ZAEHLERLABYRINTH > 50
@@ -119,8 +119,12 @@
               END-PERFORM
               ADD 1 TO ZAEHLERLABYRINTH
            END-PERFORM.
+           IF ANZBESUCHER = 0
+                 MOVE "KEINE BESUCHER VORHANDEN" TO FEHLERMELDUNG
+                 EXIT PROGRAM
+              END-IF
            EXIT PROGRAM.
-       STERUERUNG-EXIT. EXIT.
+       STEUERUNG-EXIT. EXIT.
       
        PRUEFPUNKT SECTION.
            MOVE AKTUELLEZEILE(ZAEHLERZEILE:1) TO ZEICHEN.
@@ -142,7 +146,7 @@
       * IST ES EIN BESUCHER?
            IF ZEICHEN IS ALPHABETIC AND ZEICHEN NOT = 'X'
             AND ZEICHEN NOT = SPACE
-              IF ANZBESUCHER < 6
+              IF ANZBESUCHER < 5
                  MOVE ZAEHLERLABYRINTH TO ZEILE(ANZBESUCHER)
                  MOVE ZAEHLERZEILE     TO STELLE(ANZBESUCHER)
                  ADD 1 TO ANZBESUCHER
@@ -245,6 +249,6 @@
               MOVE 1                            TO ZAEHLERZEILE.
               MOVE 1                            TO ZAEHLERLABYRINTH.
               MOVE 1                            TO ENDEZEILE.
-              MOVE 1                            TO ANZBESUCHER.
+              MOVE 0                            TO ANZBESUCHER.
        INITIALISIEREN-EXIT. EXIT.
        END PROGRAM LABPRUEF.

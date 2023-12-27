@@ -3,8 +3,6 @@
 ## TODOs
 
 - testfälle schreiben
-- fehler fixen
-- zu viele spalten geht noch nicht
 
 
 ## Benutzte Programme & Extensions

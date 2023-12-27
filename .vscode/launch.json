@@ -9,7 +9,7 @@
             "type": "cbl-gdb",
             "request": "launch",
             "preLaunchTask": "make",
-            "program": "${workspaceFolder}/LABYRINT",
+            "program": "${workspaceFolder}/Application",
             "cwd": "${workspaceFolder}",
             "arguments": ""
         },
