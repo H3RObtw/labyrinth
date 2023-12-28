@@ -55,7 +55,6 @@
            PERFORM INITIALISIEREN.       
       *    ALLE BESUCHER DURCHGEHEN
            PERFORM UNTIL ZAEHLERBESUCHER > 5
-              DISPLAY 'ZAEHLERBESUCHER: ' ZAEHLERBESUCHER
               INITIALIZE WEGE(ZAEHLERBESUCHER)       
       *       MUSS EIN WEG GESUCHT WERDEN?
               EVALUATE TRUE
@@ -64,7 +63,6 @@
                AND  ZEILE(ZAEHLERBESUCHER) = 0
                  MOVE 'KEIN BESUCHER'    TO PFAD(ZAEHLERBESUCHER)
                  MOVE 0               TO PFAD-LAENGE(ZAEHLERBESUCHER)
-                 DISPLAY 'KEIN BESUCHER'
       *        IST DER BESUCHER AM RAND? -> KEINEN PFAD SUCHEN
                WHEN STELLE(ZAEHLERBESUCHER) = 1
                OR   STELLE(ZAEHLERBESUCHER) = ENDEZEILE
@@ -72,12 +70,10 @@
                OR   ZEILE(ZAEHLERBESUCHER) = 1
                  MOVE 'AM AUSGANG'       TO PFAD(ZAEHLERBESUCHER)
                  MOVE 0                  TO PFAD-LAENGE(ZAEHLERBESUCHER)
-                 DISPLAY 'BESUCHER AM AUSGANG'
       *        GüLTIGER BESUCHER -> VARIABLEN INITIALISEREN, WEG SUCHEN
                WHEN OTHER
                  INITIALIZE WEITEREVARIABLEN
                  MOVE 0                       TO ZAEHLERZUSTAND
-                 DISPLAY 'BESUCHER:' BESUCHER(ZAEHLERBESUCHER)
                  MOVE ZEILE(ZAEHLERBESUCHER)  TO ZAEHLERZEILE
                  MOVE STELLE(ZAEHLERBESUCHER) TO ZAEHLERSTELLE
                  MOVE 0    TO AKTPFAD-LAENGE 
@@ -102,30 +98,22 @@
               ADD 1 TO ZUSTAND
            END-IF       
            EVALUATE TRUE
-           WHEN ZUSTAND < 1
-              DISPLAY 'H'
+           WHEN ZUSTAND = 0
               SUBTRACT 1 FROM ZAEHLERZEILE
               ADD      1 TO AKTPFAD-LAENGE
               MOVE 'H'   TO AKTPFAD(AKTPFAD-LAENGE:1)
-              DISPLAY 'ZEILE: ' ZAEHLERZEILE ', STELLE: ' ZAEHLERSTELLE
            WHEN ZUSTAND = 1
-              DISPLAY 'R'
               ADD      1 TO ZAEHLERSTELLE
               ADD      1 TO AKTPFAD-LAENGE
               MOVE 'R'   TO AKTPFAD(AKTPFAD-LAENGE:1)
-              DISPLAY 'ZEILE: ' ZAEHLERZEILE ', STELLE: ' ZAEHLERSTELLE
            WHEN ZUSTAND = 2
-              DISPLAY 'U'
               ADD      1 TO ZAEHLERZEILE
               ADD      1 TO AKTPFAD-LAENGE
               MOVE 'U'   TO AKTPFAD(AKTPFAD-LAENGE:1)
-              DISPLAY 'ZEILE: ' ZAEHLERZEILE ', STELLE: ' ZAEHLERSTELLE
            WHEN ZUSTAND = 3
-              DISPLAY 'L'
               SUBTRACT 1 FROM ZAEHLERSTELLE
               ADD      1 TO AKTPFAD-LAENGE
               MOVE 'L'   TO AKTPFAD(AKTPFAD-LAENGE:1)
-              DISPLAY 'ZEILE: ' ZAEHLERZEILE ', STELLE: ' ZAEHLERSTELLE
            END-EVALUATE       
       *    AKTUELLES ZEICHEN UND ZEILE SPEICHERN, ZUSTAND AKTUALISIEREN
            MOVE LABZEILE(ZAEHLERZEILE)    TO AKTZEILE
@@ -140,24 +128,19 @@
            OR   AKTPFAD-LAENGE > 2499
               EVALUATE TRUE
                   WHEN  AKTPFAD-LAENGE > 2499
-                  DISPLAY 'HOW DID WE GET HERE?!'
                   MOVE    4 TO ZUSTAND
                   PERFORM ZUSTAND-SETZEN UNTIL ZUSTAND NOT = 4
               
               WHEN  AKTZEICHEN = 'X'
-                  DISPLAY 'SACKGASSE'
                   MOVE    4 TO ZUSTAND
                   PERFORM ZUSTAND-SETZEN UNTIL ZUSTAND NOT = 4
               
               WHEN  AKTPFAD-LAENGE > PFAD-LAENGE(ZAEHLERBESUCHER)
-                  DISPLAY 'ALTER PFAD KLEINER ALS NEUER PFAD'
                   MOVE    4 TO ZUSTAND
                   PERFORM ZUSTAND-SETZEN UNTIL ZUSTAND NOT = 4
      
               WHEN OTHER
       *          WURDE EIN PFAD GEFUNDEN? WENN JA IST ER KÜRZER?
-                 DISPLAY 'AUSGANG GEFUNDEN'
-                 DISPLAY AKTPFAD-LAENGE '<' PFAD-LAENGE(ZAEHLERBESUCHER)
                  IF  AKTPFAD-LAENGE < PFAD-LAENGE(ZAEHLERBESUCHER)
                  OR  PFAD-LAENGE(ZAEHLERBESUCHER) = 0
                     MOVE AKTPFAD-LAENGE TO PFAD-LAENGE(ZAEHLERBESUCHER)
@@ -168,7 +151,6 @@
               END-EVALUATE
            ELSE
               IF  AKTZEICHEN = 'X'
-                  DISPLAY 'ZURÜCK'
                   MOVE    4 TO ZUSTAND
                   PERFORM ZUSTAND-SETZEN UNTIL ZUSTAND NOT = 4
               END-IF
@@ -179,11 +161,9 @@
       *    WAS WAR DER VORHERIGE SCHRITT?
            EVALUATE TRUE
            WHEN AKTPFAD(AKTPFAD-LAENGE:1) = 'H'
-              DISPLAY '-H'
               MOVE SPACE TO AKTPFAD(AKTPFAD-LAENGE:1)
               SUBTRACT 1 FROM AKTPFAD-LAENGE
               ADD      1 TO ZAEHLERZEILE
-              DISPLAY 'ZEILE: ' ZAEHLERZEILE ', STELLE: ' ZAEHLERSTELLE
       *       WURDE MAN DEN VORHERIGEN WEG UNABSICHTLICH ZURÜCK GEHEN?
               IF AKTPFAD(AKTPFAD-LAENGE:1) = 'L'
                  MOVE 2 TO ZUSTAND
@@ -191,43 +171,34 @@
                  MOVE 1 TO ZUSTAND
               END-IF
            WHEN AKTPFAD(AKTPFAD-LAENGE:1) = 'R'
-              DISPLAY '-R'
               MOVE SPACE TO AKTPFAD(AKTPFAD-LAENGE:1)
               SUBTRACT 1 FROM AKTPFAD-LAENGE
               SUBTRACT 1 FROM ZAEHLERSTELLE
-              DISPLAY 'ZEILE: ' ZAEHLERZEILE ', STELLE: ' ZAEHLERSTELLE
               IF AKTPFAD(AKTPFAD-LAENGE:1) = 'H'
                  MOVE 3 TO ZUSTAND
               ELSE
                  MOVE 2 TO ZUSTAND
               END-IF
            WHEN AKTPFAD(AKTPFAD-LAENGE:1) = 'U'
-              DISPLAY '-U'
               MOVE SPACE TO AKTPFAD(AKTPFAD-LAENGE:1)
               SUBTRACT 1 FROM AKTPFAD-LAENGE
               SUBTRACT 1 FROM ZAEHLERZEILE
-              DISPLAY 'ZEILE: ' ZAEHLERZEILE ', STELLE: ' ZAEHLERSTELLE
               IF AKTPFAD(AKTPFAD-LAENGE:1) = 'R'
                  MOVE 4 TO ZUSTAND
               ELSE
                  MOVE 3 TO ZUSTAND
               END-IF
            WHEN AKTPFAD(AKTPFAD-LAENGE:1) = 'L'
-              DISPLAY '-L'
               MOVE SPACE TO AKTPFAD(AKTPFAD-LAENGE:1)
               SUBTRACT 1 FROM AKTPFAD-LAENGE
               ADD      1 TO   ZAEHLERSTELLE
-              DISPLAY 'ZEILE: ' ZAEHLERZEILE ', STELLE: ' ZAEHLERSTELLE
            END-EVALUATE.       
       *    IST MAN WIEDER BEIM BESUCHER ANGEKOMMEN?
            IF AKTPFAD-LAENGE < 1
               ADD  1              TO ZAEHLERZUSTAND
               MOVE ZAEHLERZUSTAND TO ZUSTAND
       *    WURDE JEDER MÖGLICHE PFAD GEFUNDEN?
-              IF ZAEHLERZUSTAND > 3   
-                 DISPLAY 'GEFUNDEN: '
-                 DISPLAY PFAD(ZAEHLERBESUCHER)
-                 DISPLAY PFAD-LAENGE(ZAEHLERBESUCHER)
+              IF ZAEHLERZUSTAND > 3
                  MOVE    1  TO ALLEGEFUNDEN              
               END-IF
            END-IF.

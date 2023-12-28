@@ -94,10 +94,7 @@
            
            IF FEHLERMELDUNG = '#'
               CALL 'LABPRUEF' USING LABYRINTH, POSBESUCH, FEHLERMELDUNG.
-               DISPLAY "FEHLERMELDUNG:" FEHLERMELDUNG
-               DISPLAY "LABYRINTH:" 
-               DISPLAY LABYRINTH
-               DISPLAY "POSBESUCH:" POSBESUCH.
+           END-IF.
 
            IF FEHLERMELDUNG = '#'
               MOVE 1 TO ZAEHLER
@@ -112,7 +109,6 @@
                      ", STELLE: " STELLE(ZAEHLER)
                      ", ZEICHEN: " LABYZEILE(TEMP:1)
                      DELIMITED BY SIZE INTO AUSGEBEN
-                     display AUSGEBEN
                      WRITE AUSGEBEN
                      MOVE SPACES TO AUSGEBEN
                      STRING "WEG: " PFAD(ZAEHLER)

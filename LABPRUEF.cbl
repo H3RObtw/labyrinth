@@ -221,9 +221,6 @@
                   STRING '2x2 FELD BEI ZEILE: ' ZAEHLERLABYRINTH
                          ', ZEICHEN: ' ZAEHLERZEILE
                   DELIMITED BY SIZE INTO FEHLERMELDUNG
-                  DISPLAY '2x2 FELD BEI ZEILE: ' ZAEHLERLABYRINTH
-                         ', ZEICHEN: ' ZAEHLERZEILE
-                  DISPLAY 'LETZTEZEILE:' LETZTEZEILE
                   EXIT PROGRAM
               END-IF.
        ZWEIERFELD-EXIT. EXIT.

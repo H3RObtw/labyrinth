@@ -34,7 +34,6 @@
                     AT END MOVE "Y" TO WS-EOF
                 END-READ
                 IF NOT FILENAME(1:1) = "#"
-                   DISPLAY "DATEI: " FILENAME
                    CALL "LABYRINT" USING FILENAME
                 END-IF
            END-PERFORM.        
