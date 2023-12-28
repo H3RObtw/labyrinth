@@ -26,7 +26,7 @@
             RECORDING F
             RECORD    050
             LABEL RECORD IS STANDARD.
-       01 LABY PIC X(500).
+       01 LABY PIC X(100).
       
        FD LABOUT
             BLOCK CONTAINS 0
@@ -38,7 +38,7 @@
       ******************************************************************
        WORKING-STORAGE SECTION.
        01  WS-EOF         PIC X(1)        VALUE "X".
-       01  WS-COUNT       PIC 99.
+       01  WS-COUNT       PIC 99          VALUE 0.
        01  LABYZEILE      PIC X(50)       VALUE ' '.
        01  ZAEHLER        PIC 99          VALUE 1.
        01  TEMP           PIC 99.
@@ -78,7 +78,7 @@
                   READ LABEIN INTO LABY
                      AT END MOVE "Y" TO WS-EOF
                   END-READ
-                  INSPECT LABY(51:99) TALLYING WS-COUNT FOR ALL "X"
+                  INSPECT LABY(51:49) TALLYING WS-COUNT FOR ALL "X"
                   IF WS-COUNT = 0
                      STRING LABY(1:50) DELIMITED BY SIZE INTO LABYZEILE
                      MOVE LABYZEILE TO LABZEILE(ZAEHLER)
@@ -93,7 +93,7 @@
            END-PERFORM.
            
            IF FEHLERMELDUNG = '#'
-               CALL 'LABPRUEF' USING LABYRINTH, POSBESUCH, FEHLERMELDUNG.
+              CALL 'LABPRUEF' USING LABYRINTH, POSBESUCH, FEHLERMELDUNG.
                DISPLAY "FEHLERMELDUNG:" FEHLERMELDUNG
                DISPLAY "LABYRINTH:" 
                DISPLAY LABYRINTH

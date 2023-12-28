@@ -1,7 +1,7 @@
 error/2x2Feld.txt
 error/keinAusgang.txt
-#error/keineBesucher.txt
-#error/zuVieleBesucher.txt
+error/keineBesucher.txt
+error/zuVieleBesucher.txt
 error/zuVieleSpalten.txt
 error/zuVieleZeilen.txt
 LAB.txt

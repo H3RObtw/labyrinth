@@ -45,9 +45,9 @@
        LINKAGE SECTION.
       ******************************************************************
        01  LABYRINTH.
-           05  LABZEILE    OCCURS 50 PIC X(50).
-           05  LETZTEZEILE           PIC 9(2).
-           05  ENDEZEILE             PIC 9(2).
+           05  LABZEILE OCCURS 50 PIC X(50).
+           05  LETZTEZEILE        PIC 99.
+           05  ENDEZEILE          PIC 99.
        01  POSBESUCH.
            05  BESUCHER OCCURS 5.
                10 ZEILE           PIC 99.
@@ -55,7 +55,7 @@
            05  WEGE     OCCURS 5.
                10 PFAD            PIC X(2500).
                10 PFAD-LAENGE     PIC 9999.
-       01  FEHLERMELDUNG             PIC X(50) VALUE '#'.
+       01  FEHLERMELDUNG          PIC X(50)       VALUE '#'.
       /
       ******************************************************************
        PROCEDURE DIVISION USING LABYRINTH, POSBESUCH, FEHLERMELDUNG.
@@ -119,10 +119,11 @@
               END-PERFORM
               ADD 1 TO ZAEHLERLABYRINTH
            END-PERFORM.
-           IF ANZBESUCHER = 0
-                 MOVE "KEINE BESUCHER VORHANDEN" TO FEHLERMELDUNG
-                 EXIT PROGRAM
-              END-IF
+
+           IF ANZBESUCHER = 1
+              MOVE "KEINE BESUCHER VORHANDEN" TO FEHLERMELDUNG
+           END-IF.
+           
            EXIT PROGRAM.
        STEUERUNG-EXIT. EXIT.
       
@@ -146,7 +147,7 @@
       * IST ES EIN BESUCHER?
            IF ZEICHEN IS ALPHABETIC AND ZEICHEN NOT = 'X'
             AND ZEICHEN NOT = SPACE
-              IF ANZBESUCHER < 5
+              IF ANZBESUCHER < 6
                  MOVE ZAEHLERLABYRINTH TO ZEILE(ANZBESUCHER)
                  MOVE ZAEHLERZEILE     TO STELLE(ANZBESUCHER)
                  ADD 1 TO ANZBESUCHER
@@ -169,7 +170,7 @@
            END-IF.
            IF ANZBESPUNKTE > 100
               MOVE "ZU VIELE AUSGÄNGE, SACKGASSEN UND KREUZUNGSPUNKTE"
-               TO FEHLERMELDUNG
+                 TO FEHLERMELDUNG
               EXIT PROGRAM
            END-IF.
        PRUEFPUNKT-EXIT. EXIT.
@@ -223,7 +224,7 @@
                   DISPLAY '2x2 FELD BEI ZEILE: ' ZAEHLERLABYRINTH
                          ', ZEICHEN: ' ZAEHLERZEILE
                   DISPLAY 'LETZTEZEILE:' LETZTEZEILE
-                 EXIT PROGRAM
+                  EXIT PROGRAM
               END-IF.
        ZWEIERFELD-EXIT. EXIT.
       
@@ -249,6 +250,6 @@
               MOVE 1                            TO ZAEHLERZEILE.
               MOVE 1                            TO ZAEHLERLABYRINTH.
               MOVE 1                            TO ENDEZEILE.
-              MOVE 0                            TO ANZBESUCHER.
+              MOVE 1                            TO ANZBESUCHER.
        INITIALISIEREN-EXIT. EXIT.
        END PROGRAM LABPRUEF.
