@@ -52,6 +52,7 @@
            05  BESUCHER OCCURS 5.
                10 ZEILE           PIC 99.
                10 STELLE          PIC 99.
+               10 BESUCHERZEICHEN         PIC X(1).
            05  WEGE     OCCURS 5.
                10 PFAD            PIC X(2500).
                10 PFAD-LAENGE     PIC 9999.
@@ -150,6 +151,7 @@
               IF ANZBESUCHER < 6
                  MOVE ZAEHLERLABYRINTH TO ZEILE(ANZBESUCHER)
                  MOVE ZAEHLERZEILE     TO STELLE(ANZBESUCHER)
+                 MOVE ZEICHEN TO BESUCHERZEICHEN(ANZBESUCHER)
                  ADD 1 TO ANZBESUCHER
               ELSE
                  MOVE "ZU VIELE BESUCHER" TO FEHLERMELDUNG

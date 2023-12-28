@@ -28,6 +28,7 @@
           05 ZUSTAND            PIC 9.
           05 AKTZEILE           PIC X(50).
           05 AKTZEICHEN         PIC X.
+          05 BESUCHERZEICHEN    PIC X.
           05 ALLEGEFUNDEN       PIC 9.
           05 AKTPFAD            PIC X(2500).
           05 AKTPFAD-LAENGE     PIC 9999.
@@ -43,6 +44,7 @@
            05  BESUCHER OCCURS 5.
                10 ZEILE           PIC 99.
                10 STELLE          PIC 99.
+               10 BESUCHERZEICHEN PIC X(1).
            05  WEGE     OCCURS 5.
                10 PFAD            PIC X(2500).
                10 PFAD-LAENGE     PIC 9999.
@@ -83,7 +85,7 @@
                     MOVE 'BESUCHER HAT KEINEN AUSGANG' 
                         TO PFAD(ZAEHLERBESUCHER) 
                  END-IF
-              END-EVALUATE       
+              END-EVALUATE 
               ADD 1 TO ZAEHLERBESUCHER
            END-PERFORM.
            EXIT PROGRAM.
@@ -99,18 +101,23 @@
            END-IF       
            EVALUATE TRUE
            WHEN ZUSTAND = 0
+      *    BREADCRUMB SETZTEN     
+              MOVE '.' TO LABZEILE(ZAEHLERZEILE)(ZAEHLERSTELLE:1)
               SUBTRACT 1 FROM ZAEHLERZEILE
               ADD      1 TO AKTPFAD-LAENGE
               MOVE 'H'   TO AKTPFAD(AKTPFAD-LAENGE:1)
            WHEN ZUSTAND = 1
+              MOVE '.' TO LABZEILE(ZAEHLERZEILE)(ZAEHLERSTELLE:1)
               ADD      1 TO ZAEHLERSTELLE
               ADD      1 TO AKTPFAD-LAENGE
               MOVE 'R'   TO AKTPFAD(AKTPFAD-LAENGE:1)
            WHEN ZUSTAND = 2
+              MOVE '.' TO LABZEILE(ZAEHLERZEILE)(ZAEHLERSTELLE:1)
               ADD      1 TO ZAEHLERZEILE
               ADD      1 TO AKTPFAD-LAENGE
               MOVE 'U'   TO AKTPFAD(AKTPFAD-LAENGE:1)
            WHEN ZUSTAND = 3
+              MOVE '.' TO LABZEILE(ZAEHLERZEILE)(ZAEHLERSTELLE:1)
               SUBTRACT 1 FROM ZAEHLERSTELLE
               ADD      1 TO AKTPFAD-LAENGE
               MOVE 'L'   TO AKTPFAD(AKTPFAD-LAENGE:1)
@@ -131,7 +138,7 @@
                   MOVE    4 TO ZUSTAND
                   PERFORM ZUSTAND-SETZEN UNTIL ZUSTAND NOT = 4
               
-              WHEN  AKTZEICHEN = 'X'
+              WHEN  AKTZEICHEN = 'X'  OR  AKTZEICHEN = '.'
                   MOVE    4 TO ZUSTAND
                   PERFORM ZUSTAND-SETZEN UNTIL ZUSTAND NOT = 4
               
@@ -150,7 +157,7 @@
                  PERFORM ZUSTAND-SETZEN UNTIL ZUSTAND NOT = 4
               END-EVALUATE
            ELSE
-              IF  AKTZEICHEN = 'X'
+              IF  AKTZEICHEN = 'X'  OR  AKTZEICHEN = '.'
                   MOVE    4 TO ZUSTAND
                   PERFORM ZUSTAND-SETZEN UNTIL ZUSTAND NOT = 4
               END-IF
@@ -164,6 +171,7 @@
               MOVE SPACE TO AKTPFAD(AKTPFAD-LAENGE:1)
               SUBTRACT 1 FROM AKTPFAD-LAENGE
               ADD      1 TO ZAEHLERZEILE
+              MOVE ' ' TO LABZEILE(ZAEHLERZEILE)(ZAEHLERSTELLE:1)
       *       WURDE MAN DEN VORHERIGEN WEG UNABSICHTLICH ZURÜCK GEHEN?
               IF AKTPFAD(AKTPFAD-LAENGE:1) = 'L'
                  MOVE 2 TO ZUSTAND
@@ -174,6 +182,7 @@
               MOVE SPACE TO AKTPFAD(AKTPFAD-LAENGE:1)
               SUBTRACT 1 FROM AKTPFAD-LAENGE
               SUBTRACT 1 FROM ZAEHLERSTELLE
+              MOVE ' ' TO LABZEILE(ZAEHLERZEILE)(ZAEHLERSTELLE:1)
               IF AKTPFAD(AKTPFAD-LAENGE:1) = 'H'
                  MOVE 3 TO ZUSTAND
               ELSE
@@ -183,6 +192,7 @@
               MOVE SPACE TO AKTPFAD(AKTPFAD-LAENGE:1)
               SUBTRACT 1 FROM AKTPFAD-LAENGE
               SUBTRACT 1 FROM ZAEHLERZEILE
+              MOVE ' ' TO LABZEILE(ZAEHLERZEILE)(ZAEHLERSTELLE:1)
               IF AKTPFAD(AKTPFAD-LAENGE:1) = 'R'
                  MOVE 4 TO ZUSTAND
               ELSE
@@ -192,6 +202,7 @@
               MOVE SPACE TO AKTPFAD(AKTPFAD-LAENGE:1)
               SUBTRACT 1 FROM AKTPFAD-LAENGE
               ADD      1 TO   ZAEHLERSTELLE
+              MOVE ' ' TO LABZEILE(ZAEHLERZEILE)(ZAEHLERSTELLE:1)
            END-EVALUATE.       
       *    IST MAN WIEDER BEIM BESUCHER ANGEKOMMEN?
            IF AKTPFAD-LAENGE < 1
@@ -203,6 +214,31 @@
               END-IF
            END-IF.
        ZUSTAND-SETZEN-EXIT. EXIT. 
+
+       REMOVE-BREADCRUMBS SECTION.
+           EVALUATE TRUE
+           WHEN AKTPFAD(AKTPFAD-LAENGE:1) = 'H'
+              MOVE SPACE TO AKTPFAD(AKTPFAD-LAENGE:1)
+              SUBTRACT 1 FROM AKTPFAD-LAENGE
+              ADD      1 TO ZAEHLERZEILE
+              MOVE ' ' TO LABZEILE(ZAEHLERZEILE)(ZAEHLERSTELLE:1)
+           WHEN AKTPFAD(AKTPFAD-LAENGE:1) = 'R'
+              MOVE SPACE TO AKTPFAD(AKTPFAD-LAENGE:1)
+              SUBTRACT 1 FROM AKTPFAD-LAENGE
+              SUBTRACT 1 FROM ZAEHLERSTELLE
+              MOVE ' ' TO LABZEILE(ZAEHLERZEILE)(ZAEHLERSTELLE:1)
+           WHEN AKTPFAD(AKTPFAD-LAENGE:1) = 'U'
+              MOVE SPACE TO AKTPFAD(AKTPFAD-LAENGE:1)
+              SUBTRACT 1 FROM AKTPFAD-LAENGE
+              SUBTRACT 1 FROM ZAEHLERZEILE
+              MOVE ' ' TO LABZEILE(ZAEHLERZEILE)(ZAEHLERSTELLE:1)
+           WHEN AKTPFAD(AKTPFAD-LAENGE:1) = 'L'
+              MOVE SPACE TO AKTPFAD(AKTPFAD-LAENGE:1)
+              SUBTRACT 1 FROM AKTPFAD-LAENGE
+              ADD      1 TO   ZAEHLERSTELLE
+              MOVE ' ' TO LABZEILE(ZAEHLERZEILE)(ZAEHLERSTELLE:1)
+           END-EVALUATE.
+       REMOVE-BREADCRUMBS-EXIT. EXIT.
              
        INITIALISIEREN SECTION.
            INITIALIZE ZAEHLER.

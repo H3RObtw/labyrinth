@@ -50,6 +50,7 @@
            05  BESUCHER OCCURS 5.
                10 ZEILE           PIC 99.
                10 STELLE          PIC 99.
+               10 BESUCHERZEICHEN PIC X(1).
            05  WEGE     OCCURS 5.
                10 PFAD            PIC X(2500).
                10 PFAD-LAENGE     PIC 9999.
@@ -107,7 +108,7 @@
                      MOVE STELLE(ZAEHLER)          TO TEMP
                      STRING "BESUCHER: ZEILE: " ZEILE(ZAEHLER)
                      ", STELLE: " STELLE(ZAEHLER)
-                     ", ZEICHEN: " LABYZEILE(TEMP:1)
+                     ", ZEICHEN: " BESUCHERZEICHEN(ZAEHLER)
                      DELIMITED BY SIZE INTO AUSGEBEN
                      WRITE AUSGEBEN
                      MOVE SPACES TO AUSGEBEN
