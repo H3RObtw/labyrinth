@@ -93,7 +93,7 @@
            END-PERFORM.
            
            IF FEHLERMELDUNG = '#'
-              CALL 'LABPRUEF' USING LABYRINTH, POSBESUCH, FEHLERMELDUNG.
+              CALL 'LABPRUEF' USING LABYRINTH, POSBESUCH, FEHLERMELDUNG
            END-IF.
 
            IF FEHLERMELDUNG = '#'
