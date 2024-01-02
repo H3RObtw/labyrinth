@@ -133,18 +133,19 @@
            OR   AKTPFAD-LAENGE > PFAD-LAENGE(ZAEHLERBESUCHER)
            OR   AKTPFAD-LAENGE > 2499
               EVALUATE TRUE
-                  WHEN  AKTPFAD-LAENGE > 2499
+
+               WHEN  AKTZEICHEN = 'X'  OR  AKTZEICHEN = '.'
                   MOVE    4 TO ZUSTAND
                   PERFORM ZUSTAND-SETZEN UNTIL ZUSTAND NOT = 4
-              
-              WHEN  AKTZEICHEN = 'X'  OR  AKTZEICHEN = '.'
-                  MOVE    4 TO ZUSTAND
-                  PERFORM ZUSTAND-SETZEN UNTIL ZUSTAND NOT = 4
-              
+                  
               WHEN  AKTPFAD-LAENGE > PFAD-LAENGE(ZAEHLERBESUCHER)
                   MOVE    4 TO ZUSTAND
                   PERFORM ZUSTAND-SETZEN UNTIL ZUSTAND NOT = 4
-     
+
+               WHEN  AKTPFAD-LAENGE > 2499
+                  MOVE    4 TO ZUSTAND
+                  PERFORM ZUSTAND-SETZEN UNTIL ZUSTAND NOT = 4
+              
               WHEN OTHER
       *          WURDE EIN PFAD GEFUNDEN? WENN JA IST ER KÜRZER?
                  IF  AKTPFAD-LAENGE < PFAD-LAENGE(ZAEHLERBESUCHER)
