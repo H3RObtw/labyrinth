@@ -112,7 +112,8 @@
                      DELIMITED BY SIZE INTO AUSGEBEN
                      WRITE AUSGEBEN
                      MOVE SPACES TO AUSGEBEN
-                     STRING "WEG: " PFAD(ZAEHLER)
+                     STRING "LAENGE: " PFAD-LAENGE(ZAEHLER)
+                     ", WEG: " PFAD(ZAEHLER)  
                      DELIMITED BY SIZE INTO AUSGEBEN
                      WRITE AUSGEBEN  
                      MOVE SPACES TO AUSGEBEN
