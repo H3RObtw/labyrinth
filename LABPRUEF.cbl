@@ -5,7 +5,6 @@
        IDENTIFICATION DIVISION.
       ******************************************************************
        PROGRAM-ID. LABPRUEF.
-       DATE-COMPILED.
        ENVIRONMENT DIVISION.
        CONFIGURATION SECTION.
        SPECIAL-NAMES.
@@ -22,21 +21,21 @@
       *****************************************************************
        WORKING-STORAGE SECTION.
       *****************************************************************
-      * ZAEHLER
+      *    ZAEHLER
        01 ZAEHLERZEILE               PIC 9(2)  VALUE 1.
        01 ZAEHLERLABYRINTH           PIC 9(2)  VALUE 1.
        01 LETZTESZEICHEN             PIC 9(2)  VALUE 1.
        01 ZAEHLERISTBUCHSTABE        PIC 9(2)  VALUE 1.
-      * MAX 100 BESONDERE PUNKTE
+      *    MAX 100 BESONDERE PUNKTE
        01 ANZBESPUNKTE               PIC 9(3)  VALUE 0.
-      * MAX 5 BESUCHER
+      *    MAX 5 BESUCHER
        01 ANZBESUCHER                PIC 9     VALUE 1.
        01 ANZRICHTUNGEN              PIC 9     VALUE 0.
-      * BOOLSCHE VARIABLEN
+      *    BOOLSCHE VARIABLEN
        01 KEINDOPPELFELD             PIC 9     VALUE 0.
        01 BUCHSTABE                  PIC 9     VALUE 0.
        01 ENDEGEFUNDEN               PIC 9     VALUE 0.
-      * SONSTIGE VARIABLEN
+      *    SONSTIGE VARIABLEN
        01 AKTUELLEZEILE              PIC X(50).
        01 ZEICHEN                    PIC X.
        01 DIFFERENZ                  PIC 9(2)  VALUE 0.
@@ -63,7 +62,7 @@
       ******************************************************************
        STEUERUNG SECTION.
            PERFORM INITIALISIEREN.
-      * DIMENSION FESTLEGEN UND ÜBERPRÜFEN
+      *    DIMENSION FESTLEGEN UND ÜBERPRÜFEN
            PERFORM UNTIL ZAEHLERLABYRINTH > 50
               MOVE LABZEILE(ZAEHLERLABYRINTH) TO AKTUELLEZEILE
               MOVE 50 TO ZAEHLERZEILE
@@ -95,7 +94,7 @@
            MOVE 1 TO ZAEHLERLABYRINTH.
            PERFORM UNTIL ZAEHLERLABYRINTH > LETZTEZEILE
               MOVE LABZEILE(ZAEHLERLABYRINTH) TO AKTUELLEZEILE
-      * IST ES EIN 2x2 FELD?
+      *    IST ES EIN 2x2 FELD?
               MOVE 1 TO ZAEHLERZEILE
               PERFORM UNTIL ZAEHLERZEILE >=  ENDEZEILE
                  IF ZAEHLERLABYRINTH NOT = LETZTEZEILE AND
@@ -108,7 +107,7 @@
               ADD 1 TO ZAEHLERLABYRINTH
            END-PERFORM.
       
-      * AUF BESONDERE FELDER ÜBERPRÜFEN
+      *    AUF BESONDERE FELDER ÜBERPRÜFEN
            MOVE 1 TO ZAEHLERZEILE.
            MOVE 1 TO ZAEHLERLABYRINTH.
            PERFORM UNTIL ZAEHLERLABYRINTH > LETZTEZEILE
@@ -130,13 +129,13 @@
       
        PRUEFPUNKT SECTION.
            MOVE AKTUELLEZEILE(ZAEHLERZEILE:1) TO ZEICHEN.
-      * IST ES EIN ZUGELASSENES ZEICHEN?
+      *    IST ES EIN ZUGELASSENES ZEICHEN?
            IF ZEICHEN IS NOT ALPHABETIC
               MOVE "EIN NICHTZUGELASSENES ZEICHEN ENTHALTEN"
                TO FEHLERMELDUNG
               EXIT PROGRAM
            END-IF.
-      * IST ES EIN RANDZEICHEN > AUSGANG?
+      *    IST ES EIN RANDZEICHEN > AUSGANG?
            IF ZAEHLERZEILE   = ENDEZEILE   OR
             ZAEHLERLABYRINTH = LETZTEZEILE OR
             ZAEHLERZEILE     = 1           OR
@@ -145,7 +144,7 @@
                  ADD 1 TO ANZBESPUNKTE
               END-IF
            END-IF.
-      * IST ES EIN BESUCHER?
+      *    IST ES EIN BESUCHER?
            IF ZEICHEN IS ALPHABETIC AND ZEICHEN NOT = 'X'
             AND ZEICHEN NOT = SPACE
               IF ANZBESUCHER < 6
@@ -158,7 +157,7 @@
                  EXIT PROGRAM
               END-IF
            END-IF.
-      * KREUZUNG ODER SACKGASSE?
+      *    KREUZUNG ODER SACKGASSE?
            IF ZAEHLERLABYRINTH NOT = ENDEZEILE OR
             ZAEHLERZEILE NOT = ENDEZEILE OR
             ZAEHLERLABYRINTH = 1 OR

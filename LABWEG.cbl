@@ -5,7 +5,6 @@
        IDENTIFICATION DIVISION.
       ******************************************************************
        PROGRAM-ID. LABWEG.
-       DATE-COMPILED.
        ENVIRONMENT DIVISION.
        CONFIGURATION SECTION.
        SPECIAL-NAMES.
