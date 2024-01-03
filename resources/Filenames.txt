@@ -5,7 +5,7 @@ error/zuVieleBesucher.txt
 error/zuVieleSonderpunkte
 error/zuVieleSpalten.txt
 error/zuVieleZeilen.txt
-LAB.txt
+LAB1.txt
 LAB2.txt
 LAB3.txt
 LAB4.txt
