@@ -61,7 +61,7 @@
            OPEN INPUT  LABEIN.
            OPEN OUTPUT LABOUT.
            PERFORM UNTIL WS-EOF = "Y"
-               IF ZAEHLER > 50
+               IF ZAEHLER > 51
                   MOVE 'ES GIBT ZU VIELE ZEILEN IN DER EINGABEDATEI'
                   TO FEHLERMELDUNG
                   MOVE "Y" TO WS-EOF
