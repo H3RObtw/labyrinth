@@ -1,25 +1,20 @@
-      ******************************************************************
-      * Author: Andreas Bauerfeind, Jona Gölthenboth
-      * Purpose:Einlesen der Eingabedatei, Aufrufen der Unterprogramme,
-      *         Schreiben der Ausgabedatei
-      ******************************************************************
        IDENTIFICATION DIVISION.
-      ******************************************************************
+
        PROGRAM-ID. LABYRINT.
        ENVIRONMENT DIVISION.
        CONFIGURATION SECTION.
        SPECIAL-NAMES.
-      ******************************************************************
+
        INPUT-OUTPUT SECTION.
-      ******************************************************************
+
        FILE-CONTROL.
            SELECT LABEIN   ASSIGN TO LABY
                ORGANIZATION IS LINE SEQUENTIAL.  
            SELECT LABOUT   ASSIGN TO AUSGEBEN
                ORGANIZATION IS LINE SEQUENTIAL.  
-      ******************************************************************
+
        DATA DIVISION.
-      ******************************************************************
+
        FILE SECTION.
        FD LABEIN
             BLOCK CONTAINS 0
@@ -35,7 +30,6 @@
             LABEL RECORD IS STANDARD.
        01 AUSGEBEN PIC X(500).
       
-      ******************************************************************
        WORKING-STORAGE SECTION.
        01  WS-EOF         PIC X(1)        VALUE "X".
        01  WS-COUNT       PIC 99          VALUE 0.
@@ -56,16 +50,12 @@
                10 PFAD-LAENGE     PIC 9999.
        01  FEHLERMELDUNG  PIC X(50)       VALUE '#'.
 
-      / 
-      ******************************************************************
+
        LINKAGE SECTION.
-      ****************************************************************** 
        01 FILENAME PIC X(50).
-      /
-      ******************************************************************
+
        PROCEDURE DIVISION USING FILENAME.
-      ******************************************************************
-      /
+
        STEUERUNG SECTION.
            PERFORM INITIALISIEREN.
            OPEN INPUT  LABEIN.

@@ -1,26 +1,17 @@
-      ******************************************************************
-      * Author: Jona Gölthenboth
-      * Purpose:Eingabevalidierung und Analyse
-      ******************************************************************
        IDENTIFICATION DIVISION.
-      ******************************************************************
+
        PROGRAM-ID. LABPRUEF.
        ENVIRONMENT DIVISION.
        CONFIGURATION SECTION.
        SPECIAL-NAMES.
-      /
-      ******************************************************************
+
        INPUT-OUTPUT SECTION.
-      ******************************************************************
       
        FILE-CONTROL.
        DATA DIVISION.
        FILE SECTION.
       
-      /
-      *****************************************************************
        WORKING-STORAGE SECTION.
-      *****************************************************************
       *    ZAEHLER
        01 ZAEHLERZEILE               PIC 9(2)  VALUE 1.
        01 ZAEHLERLABYRINTH           PIC 9(2)  VALUE 1.
@@ -39,10 +30,9 @@
        01 AKTUELLEZEILE              PIC X(50).
        01 ZEICHEN                    PIC X.
        01 DIFFERENZ                  PIC 9(2)  VALUE 0.
-      /
-      ******************************************************************
+
        LINKAGE SECTION.
-      ******************************************************************
+
        01  LABYRINTH.
            05  LABZEILE OCCURS 50 PIC X(50).
            05  LETZTEZEILE        PIC 99.
@@ -56,10 +46,10 @@
                10 PFAD            PIC X(2500).
                10 PFAD-LAENGE     PIC 9999.
        01  FEHLERMELDUNG          PIC X(50)       VALUE '#'.
-      /
-      ******************************************************************
+      
+      
        PROCEDURE DIVISION USING LABYRINTH, POSBESUCH, FEHLERMELDUNG.
-      ******************************************************************
+
        STEUERUNG SECTION.
            PERFORM INITIALISIEREN.
       *    DIMENSION FESTLEGEN UND ÜBERPRÜFEN
@@ -94,31 +84,25 @@
            MOVE 1 TO ZAEHLERLABYRINTH.
            PERFORM UNTIL ZAEHLERLABYRINTH > LETZTEZEILE
               MOVE LABZEILE(ZAEHLERLABYRINTH) TO AKTUELLEZEILE
-      *    IST ES EIN 2x2 FELD?
               MOVE 1 TO ZAEHLERZEILE
               PERFORM UNTIL ZAEHLERZEILE >=  ENDEZEILE
+      *    IST ES EIN 2x2 FELD?        
                  IF ZAEHLERLABYRINTH NOT = LETZTEZEILE AND
                   ZAEHLERZEILE NOT = ENDEZEILE AND
                   AKTUELLEZEILE(ZAEHLERZEILE:1)= SPACE
                    PERFORM ZWEIERFELD
                  END-IF
+
+      *    AUF BESONDERE FELDER ÜBERPRÜFEN
+                 PERFORM PRUEFPUNKT
+
                  ADD 1 TO ZAEHLERZEILE
               END-PERFORM
               ADD 1 TO ZAEHLERLABYRINTH
            END-PERFORM.
       
       *    AUF BESONDERE FELDER ÜBERPRÜFEN
-           MOVE 1 TO ZAEHLERZEILE.
-           MOVE 1 TO ZAEHLERLABYRINTH.
-           PERFORM UNTIL ZAEHLERLABYRINTH > LETZTEZEILE
-              MOVE LABZEILE(ZAEHLERLABYRINTH) TO AKTUELLEZEILE
-              MOVE 1 TO ZAEHLERZEILE
-              PERFORM UNTIL ZAEHLERZEILE > ENDEZEILE
-                 PERFORM PRUEFPUNKT
-                 ADD 1 TO ZAEHLERZEILE
-              END-PERFORM
-              ADD 1 TO ZAEHLERLABYRINTH
-           END-PERFORM.
+           
 
            IF ANZBESUCHER = 1
               MOVE "KEINE BESUCHER VORHANDEN" TO FEHLERMELDUNG

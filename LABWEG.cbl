@@ -1,22 +1,15 @@
-      ******************************************************************
-      * Author: Andreas Bauerfeind
-      * Purpose:Sucht den kürzesten Weg zum Ausgang für jeden Besucher
-      ******************************************************************
        IDENTIFICATION DIVISION.
-      ******************************************************************
+
        PROGRAM-ID. LABWEG.
        ENVIRONMENT DIVISION.
        CONFIGURATION SECTION.
        SPECIAL-NAMES.
-      /
-      ******************************************************************
+
        INPUT-OUTPUT SECTION.
-      ******************************************************************       
        FILE-CONTROL.
        DATA DIVISION.
        FILE SECTION.       
-      /
-      *****************************************************************
+
        WORKING-STORAGE SECTION.
        01 ZAEHLER.
           05 ZAEHLERZEILE       PIC 99.
@@ -31,9 +24,7 @@
           05 ALLEGEFUNDEN       PIC 9.
           05 AKTPFAD            PIC X(2500).
           05 AKTPFAD-LAENGE     PIC 9999.
-      *****************************************************************
-      /
-      ******************************************************************
+
        LINKAGE SECTION.
        01  LABYRINTH.
            05  LABZEILE OCCURS 50 PIC X(50).
@@ -47,11 +38,10 @@
            05  WEGE     OCCURS 5.
                10 PFAD            PIC X(2500).
                10 PFAD-LAENGE     PIC 9999.
-      ******************************************************************
-      /
-      ******************************************************************
+               
+
        PROCEDURE DIVISION USING LABYRINTH, POSBESUCH.
-      ******************************************************************
+       
        STEUERUNG SECTION.
            PERFORM INITIALISIEREN.       
       *    ALLE BESUCHER DURCHGEHEN
